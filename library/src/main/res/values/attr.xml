@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundedTextView">
+        <!-- 背景色 -->
+        <attr name="btn_solid_color" format="color" />
+        <!-- 邊框色 -->
+        <attr name="btn_stroke_color" format="color" />
+        <!-- 邊框厚度 -->
+        <attr name="btn_stroke_width" format="dimension" />
+        <!-- 邊框虛線長度 -->
+        <attr name="btn_stroke_dash_width" format="dimension" />
+        <!-- 邊框虛線間隙 -->
+        <attr name="btn_stroke_dash_gap" format="dimension" />
+        <!-- 圓角半徑，standard 表示半徑為 min(height, width) / 2-->
+        <attr name="btn_corner_radius" format="dimension">
+            <enum name="standard" value="-1" />
+        </attr>
+        <attr name="btn_pressed_color" format="color">
+            <enum name="darker" value="-1" />
+            <enum name="grayer" value="-2" />
+        </attr>
+    </declare-styleable>
+</resources>

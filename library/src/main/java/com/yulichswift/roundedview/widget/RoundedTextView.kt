@@ -2,10 +2,9 @@ package com.yulichswift.roundedview.widget
 
 import android.content.Context
 import android.content.res.ColorStateList
-import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.Gravity
-
+import androidx.appcompat.widget.AppCompatTextView
 import com.yulichswift.roundedview.R
 import com.yulichswift.roundedview.tool.RoundedDrawable
 
@@ -32,6 +31,7 @@ class RoundedTextView : AppCompatTextView {
 
             var solidColor = typed.getColorStateList(R.styleable.RoundedTextView_btn_solid_color)
             val pressedColor = typed.getColor(R.styleable.RoundedTextView_btn_pressed_color, -1)
+            val selectedColor = typed.getColor(R.styleable.RoundedTextView_btn_selected_color, 0)
             val cornerRadius = typed.getLayoutDimension(R.styleable.RoundedTextView_btn_corner_radius, 0)
 
             val strokeColor = typed.getColor(R.styleable.RoundedTextView_btn_stroke_color, 0x0)
@@ -59,9 +59,9 @@ class RoundedTextView : AppCompatTextView {
                 drawable.setSolidColors(solidColor)
             } else {
                 when (pressedColor) {
-                    -1 -> drawable.setSolidColorsAndPressedDarker(solidColor.defaultColor)
-                    -2 -> drawable.setSolidColorsAndPressedGrayer(solidColor.defaultColor)
-                    else -> drawable.setSolidColorsAndPressedColor(solidColor.defaultColor, pressedColor)
+                    -1 -> drawable.setSolidColorsAndPressedDarker(solidColor.defaultColor, selectedColor)
+                    -2 -> drawable.setSolidColorsAndPressedGrayer(solidColor.defaultColor, selectedColor)
+                    else -> drawable.setSolidColorsAndPressedColor(solidColor.defaultColor, pressedColor, selectedColor)
                 }
             }
 

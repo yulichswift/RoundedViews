@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <com.yulichswift.roundedview.widget.RoundedTextView
+        android:id="@+id/btn"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clickable="true"
@@ -20,6 +21,7 @@
         android:textSize="19sp"
         app:btn_corner_radius="standard"
         app:btn_pressed_color="darker"
+        app:btn_selected_color="#f00"
         app:btn_solid_color="@android:color/holo_orange_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

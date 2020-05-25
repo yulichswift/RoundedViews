@@ -12,16 +12,16 @@ class RoundedDrawable(private val mIsStandard: Boolean) : GradientDrawable() {
     private var mSolidColors: ColorStateList? = null
     private var mFillColor: Int = 0
 
-    fun setSolidColorsAndPressedGrayer(normal: Int) {
-        setSolidColors(createColorStateList(normal, grayer(normal)))
+    fun setSolidColorsAndPressedGrayer(normal: Int, selected: Int) {
+        setSolidColors(createColorStateList(normal, grayer(normal), selected))
     }
 
-    fun setSolidColorsAndPressedDarker(normal: Int) {
-        setSolidColors(createColorStateList(normal, darker(normal)))
+    fun setSolidColorsAndPressedDarker(normal: Int, selected: Int) {
+        setSolidColors(createColorStateList(normal, darker(normal), selected))
     }
 
-    fun setSolidColorsAndPressedColor(normal: Int, pressed: Int) {
-        setSolidColors(createColorStateList(normal, pressed))
+    fun setSolidColorsAndPressedColor(normal: Int, pressed: Int, selected: Int) {
+        setSolidColors(createColorStateList(normal, pressed, selected))
     }
 
     fun setSolidColors(colors: ColorStateList) {
@@ -82,9 +82,17 @@ class RoundedDrawable(private val mIsStandard: Boolean) : GradientDrawable() {
         return Color.HSVToColor(hsv)
     }
 
-    private fun createColorStateList(normal: Int, pressed: Int): ColorStateList {
-        val states = arrayOf(intArrayOf(android.R.attr.state_pressed), intArrayOf())
-        val colors = intArrayOf(pressed, normal)
+    private fun createColorStateList(normal: Int, pressed: Int, selected: Int): ColorStateList {
+        val states = arrayOf(intArrayOf(android.R.attr.state_selected), intArrayOf(android.R.attr.state_pressed), intArrayOf())
+        val colors = intArrayOf(
+                let {
+                    if (selected != 0) {
+                        selected
+                    } else {
+                        pressed
+                    }
+                }
+                , pressed, normal)
         return ColorStateList(states, colors)
     }
 }

@@ -15,6 +15,6 @@ allprojects {
 ### Step 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.github.yulichswift:RoundedViews:1.2.1'
+    implementation 'com.github.yulichswift:RoundedViews:1.2.2'
 }
 ```

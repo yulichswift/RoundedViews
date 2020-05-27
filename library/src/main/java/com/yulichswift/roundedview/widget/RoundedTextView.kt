@@ -30,11 +30,12 @@ class RoundedTextView : AppCompatTextView {
             val typed = context.obtainStyledAttributes(attrs, R.styleable.RoundedTextView)
 
             var solidColor = typed.getColorStateList(R.styleable.RoundedTextView_btn_solid_color)
-            val pressedColor = typed.getColor(R.styleable.RoundedTextView_btn_pressed_color, -1)
+            val pressedColor = typed.getColor(R.styleable.RoundedTextView_btn_pressed_color, 0)
             val selectedColor = typed.getColor(R.styleable.RoundedTextView_btn_selected_color, 0)
+            val disableColor = typed.getColor(R.styleable.RoundedTextView_btn_disable_color, 0)
             val cornerRadius = typed.getLayoutDimension(R.styleable.RoundedTextView_btn_corner_radius, 0)
 
-            val strokeColor = typed.getColor(R.styleable.RoundedTextView_btn_stroke_color, 0x0)
+            val strokeColor = typed.getColor(R.styleable.RoundedTextView_btn_stroke_color, 0)
             val strokeWidth = typed.getDimensionPixelSize(R.styleable.RoundedTextView_btn_stroke_width, 0)
             val strokeDashWidth = typed.getDimensionPixelSize(R.styleable.RoundedTextView_btn_stroke_dash_width, 0)
             val strokeDashGap = typed.getDimensionPixelSize(R.styleable.RoundedTextView_btn_stroke_dash_gap, 0)
@@ -58,11 +59,7 @@ class RoundedTextView : AppCompatTextView {
             if (solidColor.isStateful) {
                 drawable.setSolidColors(solidColor)
             } else {
-                when (pressedColor) {
-                    -1 -> drawable.setSolidColorsAndPressedDarker(solidColor.defaultColor, selectedColor)
-                    -2 -> drawable.setSolidColorsAndPressedGrayer(solidColor.defaultColor, selectedColor)
-                    else -> drawable.setSolidColorsAndPressedColor(solidColor.defaultColor, pressedColor, selectedColor)
-                }
+                drawable.setSolidColorsAndPressedColor(solidColor.defaultColor, pressedColor, selectedColor, disableColor)
             }
 
             background = drawable

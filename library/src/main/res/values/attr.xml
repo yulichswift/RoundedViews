@@ -19,6 +19,13 @@
             <enum name="darker" value="-1" />
             <enum name="grayer" value="-2" />
         </attr>
-        <attr name="btn_selected_color" format="color" />
+        <attr name="btn_selected_color" format="color">
+            <enum name="darker" value="-1" />
+            <enum name="grayer" value="-2" />
+        </attr>
+        <attr name="btn_disable_color" format="color">
+            <enum name="darker" value="-1" />
+            <enum name="grayer" value="-2" />
+        </attr>
     </declare-styleable>
 </resources>

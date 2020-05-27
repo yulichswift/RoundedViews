@@ -13,11 +13,21 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        // Selected color
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+        final View button = findViewById(R.id.btn);
+        final View buttonSelected = findViewById(R.id.btn_selected);
+        final View buttonDisable = findViewById(R.id.btn_disable);
+
+        buttonSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.setSelected(!view.isSelected());
+                button.setSelected(!button.isSelected());
+            }
+        });
+
+        buttonDisable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                button.setEnabled(!button.isEnabled());
             }
         });
     }

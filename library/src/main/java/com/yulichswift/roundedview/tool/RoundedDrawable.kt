@@ -9,20 +9,31 @@ import kotlin.math.roundToInt
 
 class RoundedDrawable(private val mIsStandard: Boolean) : GradientDrawable() {
 
+    companion object {
+        const val INT_ZERO = 0
+        const val INT_DARKER = -1
+        const val INT_GRAYER = -2
+    }
+
     private var mSolidColors: ColorStateList? = null
     private var mFillColor: Int = 0
 
-    fun setSolidColorsAndPressedGrayer(normal: Int, selected: Int) {
-        setSolidColors(createColorStateList(normal, grayer(normal), selected))
+    fun setSolidColorsAndPressedColor(normal: Int, pressed: Int, selected: Int, disable: Int) {
+        val lastPressed = getColor(normal, pressed)
+        val lastSelected = getColor(normal, selected)
+        val lastDisable = getColor(normal, disable)
+
+        setSolidColors(createColorStateList(normal, lastPressed, lastSelected, lastDisable))
     }
 
-    fun setSolidColorsAndPressedDarker(normal: Int, selected: Int) {
-        setSolidColors(createColorStateList(normal, darker(normal), selected))
-    }
+    fun getColor(default: Int, color: Int) =
+            when (color) {
+                INT_ZERO -> default
+                INT_DARKER -> darker((default))
+                INT_GRAYER -> grayer((default))
+                else -> color
+            }
 
-    fun setSolidColorsAndPressedColor(normal: Int, pressed: Int, selected: Int) {
-        setSolidColors(createColorStateList(normal, pressed, selected))
-    }
 
     fun setSolidColors(colors: ColorStateList) {
         mSolidColors = colors
@@ -82,17 +93,13 @@ class RoundedDrawable(private val mIsStandard: Boolean) : GradientDrawable() {
         return Color.HSVToColor(hsv)
     }
 
-    private fun createColorStateList(normal: Int, pressed: Int, selected: Int): ColorStateList {
-        val states = arrayOf(intArrayOf(android.R.attr.state_selected), intArrayOf(android.R.attr.state_pressed), intArrayOf())
-        val colors = intArrayOf(
-                let {
-                    if (selected != 0) {
-                        selected
-                    } else {
-                        pressed
-                    }
-                }
-                , pressed, normal)
+    private fun createColorStateList(normal: Int, pressed: Int, selected: Int, disable: Int): ColorStateList {
+        val states = arrayOf(
+                intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled),
+                intArrayOf(android.R.attr.state_selected, android.R.attr.state_enabled),
+                intArrayOf(android.R.attr.state_enabled),
+                intArrayOf())
+        val colors = intArrayOf(pressed, selected, normal, disable)
         return ColorStateList(states, colors)
     }
 }
